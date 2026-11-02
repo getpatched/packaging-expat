@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 2,
+  "id": "debian-bookworm-amd64",
+  "base": {
+    "distribution": "Debian",
+    "release": "12",
+    "codename": "bookworm",
+    "sourcePocket": "security",
+    "architecture": "amd64"
+  },
+  "source": {
+    "format": "3.0 (quilt)",
+    "version": "2.5.0-1+deb12u5",
+    "publication": "https://security-tracker.debian.org/tracker/source-package/expat",
+    "publishedAt": "2026-10-21T22:34:41Z",
+    "descriptor": {
+      "name": "expat_2.5.0-1+deb12u5.dsc",
+      "url": "https://snapshot.debian.org/archive/debian-security/20261030T000000Z/pool/updates/main/e/expat/expat_2.5.0-1%2Bdeb12u5.dsc",
+      "sha256": "ef1c606d8e386052d3aea9b3b5ec43f3902107c007150960521781aa59ab1247",
+      "bytes": 1427
+    },
+    "files": [
+      {
+        "name": "expat_2.5.0.orig.tar.gz",
+        "role": "upstream-source",
+        "url": "https://snapshot.debian.org/archive/debian-security/20261030T000000Z/pool/updates/main/e/expat/expat_2.5.0.orig.tar.gz",
+        "sha256": "ab00ee05c7067fd10a35c5d2a4922ebba746ddd50ff83b79c828da17bbdf1757",
+        "bytes": 8320988
+      },
+      {
+        "name": "expat_2.5.0-1+deb12u5.debian.tar.xz",
+        "role": "debian-packaging",
+        "url": "https://snapshot.debian.org/archive/debian-security/20261030T000000Z/pool/updates/main/e/expat/expat_2.5.0-1%2Bdeb12u5.debian.tar.xz",
+        "sha256": "08bda5605c940a2068a8f5df2a798524d8f403eae6d01e4f7039074a8e244d9e",
+        "bytes": 67940
+      }
+    ],
+    "signatureVerification": {
+      "verified": false,
+      "note": "The signed Debian Bookworm Security Sources index and all source file hashes were verified with Debian's official archive key. The individual .dsc uploader signature was not separately verified."
+    }
+  },
+  "supportedSourceVersions": ["2.5.0-1+deb12u5"],
+  "packageVersion": "2.5.0-1+deb12u5+getpatched1",
+  "releaseSerial": 1,
+  "changelog": {
+    "distribution": "bookworm",
+    "urgency": "medium",
+    "maintainer": "GetPatched Maintainers <packages@getpatched.dev>",
+    "date": "Mon, 02 Nov 2026 00:00:00 +0000"
+  },
+  "binaryPackages": ["libexpat1", "libexpat1-dev", "expat"],
+  "advisoryPackages": ["libexpat1", "libexpat1-dev", "expat"],
+  "builderPackages": [],
+  "patches": ["cve-2026-117610"],
+  "buildPatches": [],
+  "releaseAccess": {
+    "policy": "public-after-checks",
+    "sponsorDelayHours": 0,
+    "sponsorEligibility": null,
+    "earlyBinaryLicenseId": null,
+    "publicContributionSpdx": "MIT",
+    "earlyUse": ["private", "commercial"],
+    "earlyRedistributionAllowed": false,
+    "publicLicenseScope": "getpatched-authored-contributions-only"
+  },
+  "status": "unreleased-development-candidate"
+}

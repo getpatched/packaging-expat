@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 3,
+  "project": {
+    "name": "GetPatched",
+    "repository": "getpatched/packaging-expat",
+    "description": "Target-specific Expat security maintenance recipe."
+  },
+  "package": {
+    "source": "expat",
+    "description": "XML parsing library and command-line tools.",
+    "upstreamProject": "Expat",
+    "upstreamRepository": "https://github.com/libexpat/libexpat",
+    "copyrightFile": "LICENSES/UPSTREAM-COPYING"
+  },
+  "targets": [
+    { "id": "debian-bookworm-amd64", "file": "targets/debian/bookworm-amd64.json" },
+    { "id": "debian-trixie-amd64", "file": "targets/debian/trixie-amd64.json" }
+  ],
+  "patchMetadata": "patches/metadata.json",
+  "regressionTests": {
+    "fixturesDirectory": "tests/fixtures",
+    "runner": "getpatched/platform:verification/regression.py"
+  },
+  "licensing": {
+    "publicContributionsSpdx": "MIT",
+    "publicContributionsLicenseFile": "LICENSE",
+    "fileLicenses": [
+      { "path": "patches/CVE-2026-117610.patch", "spdx": "MIT" },
+      {
+        "path": "tests/fixtures/CVE-2026-117610-empty-subparser.c",
+        "spdx": "MIT",
+        "licenseFile": "LICENSES/UPSTREAM-COPYING"
+      }
+    ],
+    "earlyBinaryLicenseId": null,
+    "earlyBinaryTermsFile": null,
+    "upstreamCopyrightFile": "LICENSES/debian-copyright",
+    "upstreamLicenses": "preserve"
+  }
+}

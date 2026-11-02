@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 2,
+  "id": "debian-trixie-amd64",
+  "base": {
+    "distribution": "Debian",
+    "release": "13",
+    "codename": "trixie",
+    "sourcePocket": "security",
+    "architecture": "amd64"
+  },
+  "source": {
+    "format": "3.0 (quilt)",
+    "version": "2.9.0-1~deb13u1",
+    "publication": "https://security-tracker.debian.org/tracker/source-package/expat",
+    "publishedAt": "2026-10-11T13:25:11Z",
+    "descriptor": {
+      "name": "expat_2.9.0-1~deb13u1.dsc",
+      "url": "https://snapshot.debian.org/archive/debian-security/20261030T000000Z/pool/updates/main/e/expat/expat_2.9.0-1~deb13u1.dsc",
+      "sha256": "09fe168e2186a2672e077d9fda02287b51fa08f73914fcc425b3307b503df8ff",
+      "bytes": 2157
+    },
+    "files": [
+      {
+        "name": "expat_2.9.0.orig.tar.gz",
+        "role": "upstream-source",
+        "url": "https://snapshot.debian.org/archive/debian-security/20261030T000000Z/pool/updates/main/e/expat/expat_2.9.0.orig.tar.gz",
+        "sha256": "6e8ce7b52ebbaa423c59becc7cf1e6875c42e49228c062ac8123c10e700cec27",
+        "bytes": 8488503
+      },
+      {
+        "name": "expat_2.9.0-1~deb13u1.debian.tar.xz",
+        "role": "debian-packaging",
+        "url": "https://snapshot.debian.org/archive/debian-security/20261030T000000Z/pool/updates/main/e/expat/expat_2.9.0-1~deb13u1.debian.tar.xz",
+        "sha256": "0c1575a3dc3d039f9e6751821efcdfd5246e04c6af4939defa01226d94541fba",
+        "bytes": 14348
+      }
+    ],
+    "signatureVerification": {
+      "verified": false,
+      "note": "The signed Debian Trixie Security Sources index and all source file hashes were verified with Debian's official archive key. The individual .dsc uploader signature was not separately verified."
+    }
+  },
+  "supportedSourceVersions": ["2.9.0-1~deb13u1"],
+  "packageVersion": "2.9.0-1~deb13u1+getpatched1",
+  "releaseSerial": 1,
+  "changelog": {
+    "distribution": "trixie",
+    "urgency": "medium",
+    "maintainer": "GetPatched Maintainers <packages@getpatched.dev>",
+    "date": "Mon, 02 Nov 2026 00:00:00 +0000"
+  },
+  "binaryPackages": ["libexpat1", "libexpat1-dev", "expat"],
+  "advisoryPackages": ["libexpat1", "libexpat1-dev", "expat"],
+  "builderPackages": [],
+  "patches": ["cve-2026-117610"],
+  "buildPatches": [],
+  "releaseAccess": {
+    "policy": "public-after-checks",
+    "sponsorDelayHours": 0,
+    "sponsorEligibility": null,
+    "earlyBinaryLicenseId": null,
+    "publicContributionSpdx": "MIT",
+    "earlyUse": ["private", "commercial"],
+    "earlyRedistributionAllowed": false,
+    "publicLicenseScope": "getpatched-authored-contributions-only"
+  },
+  "status": "unreleased-development-candidate"
+}

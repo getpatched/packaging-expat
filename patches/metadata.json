@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 3,
+  "patches": [
+    {
+      "id": "cve-2026-117610",
+      "kind": "security",
+      "file": "CVE-2026-117610.patch",
+      "sha256": "365988ba0fb36bf8fde4792a4288e0f5bc466411b50b888de960bb6aa3a6a5a9",
+      "title": "Handle empty non-final input in external entity subparsers",
+      "description": "Handle XML_TOK_NONE while an external-entity subparser is initializing after an empty non-final input chunk, so later input is parsed without dereferencing an unset event pointer.",
+      "license": "MIT",
+      "cves": ["CVE-2026-117610"],
+      "upstream": {
+        "repository": "https://github.com/libexpat/libexpat",
+        "commit": "bfc28346fa3efeb8ca56c17437d24a7344e5feab",
+        "url": "https://github.com/libexpat/libexpat/commit/bfc28346fa3efeb8ca56c17437d24a7344e5feab"
+      },
+      "appliesTo": [
+        { "target": "debian-bookworm-amd64", "sourceVersion": "2.5.0-1+deb12u5" },
+        { "target": "debian-trixie-amd64", "sourceVersion": "2.9.0-1~deb13u1" }
+      ],
+      "dep3": {
+        "origin": "Backport of upstream commit bfc28346fa3efeb8ca56c17437d24a7344e5feab; the same no-fuzz patch applies to both pinned Debian security sources after their quilt series.",
+        "forwarded": "not-needed; fix is merged upstream",
+        "lastUpdate": "2026-11-02"
+      },
+      "tests": [
+        {
+          "id": "CVE-2026-117610-empty-nonfinal-subparser",
+          "runner": "getpatched/platform:verification/regression.py (compiled C API probe against the installed libexpat)",
+          "fixtures": [
+            {
+              "path": "tests/fixtures/CVE-2026-117610-empty-subparser.c",
+              "sha256": "8294dff336e7aa36d0adf8f4ec17a76f54ce75e94cf6f29105b1979bceb003d6"
+            }
+          ],
+          "baselineExpectation": "The exact installed baseline crashes with SIGSEGV when an external-entity callback parses an empty non-final subparser chunk and resumes with a processing instruction.",
+          "patchedExpectation": "The exact installed patched package completes the same parse, invokes the processing-instruction handler once, and passes the xmlwf version consumer check."
+        }
+      ]
+    }
+  ]
+}
