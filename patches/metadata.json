@@ -31,11 +31,11 @@
           "fixtures": [
             {
               "path": "tests/fixtures/CVE-2026-117610-empty-subparser.c",
-              "sha256": "8294dff336e7aa36d0adf8f4ec17a76f54ce75e94cf6f29105b1979bceb003d6"
+              "sha256": "4f94d2e3a948e2406f90ea9b12cbe997722d1d21ae426e0252829b1e9c53dba6"
             }
           ],
-          "baselineExpectation": "The exact installed baseline crashes with SIGSEGV when an external-entity callback parses an empty non-final subparser chunk and resumes with a processing instruction.",
-          "patchedExpectation": "The exact installed patched package completes the same parse, invokes the processing-instruction handler once, and passes the xmlwf version consumer check."
+          "baselineExpectation": "The exact installed baseline crashes with SIGSEGV when an external-entity callback parses an empty non-final subparser chunk and resumes with a processing instruction; the installed xmlwf reports the matching baseline upstream version.",
+          "patchedExpectation": "The exact installed patched package completes the same parse, invokes the processing-instruction handler once, and the installed xmlwf reports the matching patched upstream version."
         }
       ]
     }
