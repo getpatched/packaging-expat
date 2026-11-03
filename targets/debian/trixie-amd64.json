@@ -41,18 +41,18 @@
     }
   },
   "supportedSourceVersions": ["2.9.0-1~deb13u1"],
-  "packageVersion": "2.9.0-1~deb13u1+getpatched1",
-  "releaseSerial": 1,
+  "packageVersion": "2.9.0-1~deb13u1+getpatched2",
+  "releaseSerial": 2,
   "changelog": {
     "distribution": "trixie",
     "urgency": "medium",
     "maintainer": "GetPatched Maintainers <packages@getpatched.dev>",
-    "date": "Mon, 02 Nov 2026 00:00:00 +0000"
+    "date": "Tue, 03 Nov 2026 00:00:00 +0000"
   },
   "binaryPackages": ["libexpat1", "libexpat1-dev", "expat"],
   "advisoryPackages": ["libexpat1", "libexpat1-dev", "expat"],
   "builderPackages": [],
-  "patches": ["cve-2026-117610"],
+  "patches": ["cve-2026-117610", "cve-2026-113351"],
   "buildPatches": [],
   "releaseAccess": {
     "policy": "public-after-checks",
