@@ -13,8 +13,14 @@
     "copyrightFile": "LICENSES/UPSTREAM-COPYING"
   },
   "targets": [
-    { "id": "debian-bookworm-amd64", "file": "targets/debian/bookworm-amd64.json" },
-    { "id": "debian-trixie-amd64", "file": "targets/debian/trixie-amd64.json" }
+    {
+      "id": "debian-bookworm-amd64",
+      "file": "targets/debian/bookworm-amd64.json"
+    },
+    {
+      "id": "debian-trixie-amd64",
+      "file": "targets/debian/trixie-amd64.json"
+    }
   ],
   "patchMetadata": "patches/metadata.json",
   "regressionTests": {
@@ -25,11 +31,22 @@
     "publicContributionsSpdx": "MIT",
     "publicContributionsLicenseFile": "LICENSE",
     "fileLicenses": [
-      { "path": "patches/CVE-2026-117610.patch", "spdx": "MIT" },
+      {
+        "path": "patches/CVE-2026-117610.patch",
+        "spdx": "MIT"
+      },
       {
         "path": "tests/fixtures/CVE-2026-117610-empty-subparser.c",
         "spdx": "MIT",
         "licenseFile": "LICENSES/UPSTREAM-COPYING"
+      },
+      {
+        "path": "patches/CVE-2026-41080.patch",
+        "spdx": "MIT"
+      },
+      {
+        "path": "tests/fixtures/CVE-2026-41080-entropy.c",
+        "spdx": "MIT"
       }
     ],
     "earlyBinaryLicenseId": null,

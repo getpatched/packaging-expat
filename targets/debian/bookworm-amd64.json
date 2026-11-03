@@ -40,19 +40,32 @@
       "note": "The signed Debian Bookworm Security Sources index and all source file hashes were verified with Debian's official archive key. The individual .dsc uploader signature was not separately verified."
     }
   },
-  "supportedSourceVersions": ["2.5.0-1+deb12u5"],
-  "packageVersion": "2.5.0-1+deb12u5+getpatched1",
-  "releaseSerial": 1,
+  "supportedSourceVersions": [
+    "2.5.0-1+deb12u5"
+  ],
+  "packageVersion": "2.5.0-1+deb12u5+getpatched2",
+  "releaseSerial": 2,
   "changelog": {
     "distribution": "bookworm",
     "urgency": "medium",
     "maintainer": "GetPatched Maintainers <packages@getpatched.dev>",
-    "date": "Mon, 02 Nov 2026 00:00:00 +0000"
+    "date": "Tue, 03 Nov 2026 00:00:00 +0000"
   },
-  "binaryPackages": ["libexpat1", "libexpat1-dev", "expat"],
-  "advisoryPackages": ["libexpat1", "libexpat1-dev", "expat"],
+  "binaryPackages": [
+    "libexpat1",
+    "libexpat1-dev",
+    "expat"
+  ],
+  "advisoryPackages": [
+    "libexpat1",
+    "libexpat1-dev",
+    "expat"
+  ],
   "builderPackages": [],
-  "patches": ["cve-2026-117610"],
+  "patches": [
+    "cve-2026-117610",
+    "cve-2026-41080"
+  ],
   "buildPatches": [],
   "releaseAccess": {
     "policy": "public-after-checks",
@@ -60,7 +73,10 @@
     "sponsorEligibility": null,
     "earlyBinaryLicenseId": null,
     "publicContributionSpdx": "MIT",
-    "earlyUse": ["private", "commercial"],
+    "earlyUse": [
+      "private",
+      "commercial"
+    ],
     "earlyRedistributionAllowed": false,
     "publicLicenseScope": "getpatched-authored-contributions-only"
   },
