@@ -9,15 +9,23 @@
       "title": "Handle empty non-final input in external entity subparsers",
       "description": "Handle XML_TOK_NONE while an external-entity subparser is initializing after an empty non-final input chunk, so later input is parsed without dereferencing an unset event pointer.",
       "license": "MIT",
-      "cves": ["CVE-2026-117610"],
+      "cves": [
+        "CVE-2026-117610"
+      ],
       "upstream": {
         "repository": "https://github.com/libexpat/libexpat",
         "commit": "bfc28346fa3efeb8ca56c17437d24a7344e5feab",
         "url": "https://github.com/libexpat/libexpat/commit/bfc28346fa3efeb8ca56c17437d24a7344e5feab"
       },
       "appliesTo": [
-        { "target": "debian-bookworm-amd64", "sourceVersion": "2.5.0-1+deb12u5" },
-        { "target": "debian-trixie-amd64", "sourceVersion": "2.9.0-1~deb13u1" }
+        {
+          "target": "debian-bookworm-amd64",
+          "sourceVersion": "2.5.0-1+deb12u5"
+        },
+        {
+          "target": "debian-trixie-amd64",
+          "sourceVersion": "2.9.0-1~deb13u1"
+        }
       ],
       "dep3": {
         "origin": "Backport of upstream commit bfc28346fa3efeb8ca56c17437d24a7344e5feab; the same no-fuzz patch applies to both pinned Debian security sources after their quilt series.",
@@ -36,6 +44,48 @@
           ],
           "baselineExpectation": "The exact installed baseline crashes with SIGSEGV when an external-entity callback parses an empty non-final subparser chunk and resumes with a processing instruction; the installed xmlwf reports the matching baseline upstream version.",
           "patchedExpectation": "The exact installed patched package completes the same parse, invokes the processing-instruction handler once, and the installed xmlwf reports the matching patched upstream version."
+        }
+      ]
+    },
+    {
+      "id": "cve-2026-41080",
+      "kind": "security",
+      "file": "CVE-2026-41080.patch",
+      "sha256": "c26c1190168ee6506377c56da873650154cc67c50391feb465bce7521d280db7",
+      "title": "Use a full 128-bit SipHash secret for XML hash-flooding protection",
+      "description": "Generate a complete 16-byte SipHash key from the configured secure random provider, preserve the legacy salt setter behavior, and add XML_SetHashSalt16Bytes for callers supplying high-quality entropy.",
+      "license": "MIT",
+      "cves": [
+        "CVE-2026-41080"
+      ],
+      "upstream": {
+        "repository": "https://github.com/libexpat/libexpat",
+        "commit": "ed80eaea0ce7179b56713fb22fe933b993aee814",
+        "url": "https://github.com/libexpat/libexpat/pull/1183"
+      },
+      "appliesTo": [
+        {
+          "target": "debian-bookworm-amd64",
+          "sourceVersion": "2.5.0-1+deb12u5"
+        }
+      ],
+      "dep3": {
+        "origin": "Backport of the security-relevant changes from upstream Expat PR #1183 to Debian Bookworm Expat 2.5.0; the new API is listed in Debian package symbols.",
+        "forwarded": "not-needed; fix is merged upstream",
+        "lastUpdate": "2026-11-03"
+      },
+      "tests": [
+        {
+          "id": "CVE-2026-41080-16-byte-hash-salt",
+          "runner": "getpatched/platform:verification/regression.py (compiled C API probe against the installed libexpat)",
+          "fixtures": [
+            {
+              "path": "tests/fixtures/CVE-2026-41080-entropy.c",
+              "sha256": "ff840429604a9a224fd97e2220474eaa6cf11233a6de79e9c0ae7afe4f033797"
+            }
+          ],
+          "baselineExpectation": "The exact installed Bookworm baseline parses the control XML, reports an 8-byte generated hash salt with EXPAT_ENTROPY_DEBUG=1, and does not export XML_SetHashSalt16Bytes.",
+          "patchedExpectation": "The installed candidate parses the control XML, reports a 16-byte generated hash salt, exports XML_SetHashSalt16Bytes, accepts a 16-byte salt before parsing, rejects NULL inputs, and rejects a salt change after parsing starts."
         }
       ]
     }
