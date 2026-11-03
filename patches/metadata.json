@@ -51,7 +51,7 @@
       "id": "cve-2026-41080",
       "kind": "security",
       "file": "CVE-2026-41080.patch",
-      "sha256": "488061fdba3f3a61000de4bbd0d7f7db3004075ff00508d8e73174ef18bcb64f",
+      "sha256": "e783729ff8f8e0dc145ed4565c0738b9e04507fd5b7f3bb2ddf3a5b294dc0276",
       "title": "Use a full 128-bit SipHash secret for XML hash-flooding protection",
       "description": "Generate a complete 16-byte SipHash key from the configured secure random provider, preserve the legacy salt setter behavior, and add XML_SetHashSalt16Bytes for callers supplying high-quality entropy.",
       "license": "MIT",
@@ -70,7 +70,7 @@
         }
       ],
       "dep3": {
-        "origin": "Backport of the security-relevant changes from upstream Expat PR #1183 to Debian Bookworm Expat 2.5.0; the new API is listed in Debian package symbols.",
+        "origin": "Backport of the security-relevant changes from upstream Expat PR #1183 to Debian Bookworm Expat 2.5.0; the new public ABI symbol is added by the recipe materializer.",
         "forwarded": "not-needed; fix is merged upstream",
         "lastUpdate": "2026-11-03"
       },
@@ -86,6 +86,22 @@
           ],
           "baselineExpectation": "The exact installed Bookworm baseline parses the control XML, reports an 8-byte generated hash salt with EXPAT_ENTROPY_DEBUG=1, and does not export XML_SetHashSalt16Bytes.",
           "patchedExpectation": "The installed candidate parses the control XML, reports a 16-byte generated hash salt, exports XML_SetHashSalt16Bytes, accepts a 16-byte salt before parsing, rejects NULL inputs, and rejects a salt change after parsing starts."
+        }
+      ],
+      "debianSymbols": [
+        {
+          "package": "libexpat1",
+          "library": "libexpat.so.1",
+          "after": "XML_SetHashSalt",
+          "symbol": "XML_SetHashSalt16Bytes",
+          "version": "2.5.0"
+        },
+        {
+          "package": "libexpat1",
+          "library": "libexpatw.so.1",
+          "after": "XML_SetHashSalt",
+          "symbol": "XML_SetHashSalt16Bytes",
+          "version": "2.5.0"
         }
       ]
     }
