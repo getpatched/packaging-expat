@@ -9,15 +9,23 @@
       "title": "Handle empty non-final input in external entity subparsers",
       "description": "Handle XML_TOK_NONE while an external-entity subparser is initializing after an empty non-final input chunk, so later input is parsed without dereferencing an unset event pointer.",
       "license": "MIT",
-      "cves": ["CVE-2026-117610"],
+      "cves": [
+        "CVE-2026-117610"
+      ],
       "upstream": {
         "repository": "https://github.com/libexpat/libexpat",
         "commit": "bfc28346fa3efeb8ca56c17437d24a7344e5feab",
         "url": "https://github.com/libexpat/libexpat/commit/bfc28346fa3efeb8ca56c17437d24a7344e5feab"
       },
       "appliesTo": [
-        { "target": "debian-bookworm-amd64", "sourceVersion": "2.5.0-1+deb12u5" },
-        { "target": "debian-trixie-amd64", "sourceVersion": "2.9.0-1~deb13u1" }
+        {
+          "target": "debian-bookworm-amd64",
+          "sourceVersion": "2.5.0-1+deb12u5"
+        },
+        {
+          "target": "debian-trixie-amd64",
+          "sourceVersion": "2.9.0-1~deb13u1"
+        }
       ],
       "dep3": {
         "origin": "Backport of upstream commit bfc28346fa3efeb8ca56c17437d24a7344e5feab; the same no-fuzz patch applies to both pinned Debian security sources after their quilt series.",
@@ -36,6 +44,48 @@
           ],
           "baselineExpectation": "The exact installed baseline crashes with SIGSEGV when an external-entity callback parses an empty non-final subparser chunk and resumes with a processing instruction; the installed xmlwf reports the matching baseline upstream version.",
           "patchedExpectation": "The exact installed patched package completes the same parse, invokes the processing-instruction handler once, and the installed xmlwf reports the matching patched upstream version."
+        }
+      ]
+    },
+    {
+      "id": "cve-2026-113351",
+      "kind": "security",
+      "file": "CVE-2026-113351.patch",
+      "sha256": "5f96db31ebc26cb6543a44ec661bfd5f3174f7758d27353e3dcfdf3adb22bc45",
+      "title": "Preserve allocation accounting across parser resets",
+      "description": "Keep tracked heap allocations made before XML_ParserReset in the allocator's baseline so a reused parser can still accept ordinary subsequent documents.",
+      "license": "MIT",
+      "cves": [
+        "CVE-2026-113351"
+      ],
+      "upstream": {
+        "repository": "https://github.com/libexpat/libexpat",
+        "commit": "d8f31e647a4d1eda088e89354f4769b0dad303d3",
+        "url": "https://github.com/libexpat/libexpat/pull/1431"
+      },
+      "appliesTo": [
+        {
+          "target": "debian-trixie-amd64",
+          "sourceVersion": "2.9.0-1~deb13u1"
+        }
+      ],
+      "dep3": {
+        "origin": "Backport of upstream Expat pull request #1431, merge commit d8f31e647a4d1eda088e89354f4769b0dad303d3; checked without fuzz against Expat 2.9.0 source.",
+        "forwarded": "not-needed; fix is merged upstream",
+        "lastUpdate": "2026-11-03"
+      },
+      "tests": [
+        {
+          "id": "CVE-2026-113351-parser-reset-allocation-accounting",
+          "runner": "getpatched/platform:verification/regression.py (compiled C API probe against the installed libexpat)",
+          "fixtures": [
+            {
+              "path": "tests/fixtures/CVE-2026-113351-parser-reset.c",
+              "sha256": "cc9fe472d02b0d3beb4d32f4a905eddc6f0b49f55b55ff4d847fe1cbb440376a"
+            }
+          ],
+          "baselineExpectation": "After parsing a valid 70 MiB attribute value and resetting the exact installed baseline parser, parsing a small document on that parser fails with XML_ERROR_NO_MEMORY; a fresh parser accepts the same document.",
+          "patchedExpectation": "The exact installed patched package parses the same small document after reset and reports no parser error; a fresh parser accepts the same document as a control."
         }
       ]
     }

@@ -26,10 +26,16 @@
     "publicContributionsLicenseFile": "LICENSE",
     "fileLicenses": [
       { "path": "patches/CVE-2026-117610.patch", "spdx": "MIT" },
+      { "path": "patches/CVE-2026-113351.patch", "spdx": "MIT" },
       {
         "path": "tests/fixtures/CVE-2026-117610-empty-subparser.c",
         "spdx": "MIT",
         "licenseFile": "LICENSES/UPSTREAM-COPYING"
+      },
+      {
+        "path": "tests/fixtures/CVE-2026-113351-parser-reset.c",
+        "spdx": "MIT",
+        "licenseFile": "LICENSE"
       }
     ],
     "earlyBinaryLicenseId": null,
