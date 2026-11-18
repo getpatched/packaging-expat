@@ -30,3 +30,5 @@ The hosted Debian Trixie `+getpatched2` build and verification [run 41666465396]
 ## Licensing
 
 The repository's `LICENSE` covers GetPatched-authored recipe metadata and documentation. Expat and its upstream fix are MIT licensed; the original upstream copyright and Debian notices are retained in `LICENSES/`. Preserve those notices in source and binary packages.
+
+[![advertisement](https://ads.servead.net/i/61fcfb5f-6e0a-4549-8cdc-1afb21715cd8.svg)](https://ads.servead.net/c/61fcfb5f-6e0a-4549-8cdc-1afb21715cd8)
