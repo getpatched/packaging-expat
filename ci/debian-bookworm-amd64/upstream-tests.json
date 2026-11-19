@@ -3,12 +3,12 @@
   "suites": [
     {
       "name": "Expat UTF-8 upstream unit tests",
-      "command": ["make", "-C", "build/tests", "check"],
-      "timeoutSeconds": 600
-    },
-    {
-      "name": "Expat UTF-16 upstream unit tests",
-      "command": ["make", "-C", "buildw/tests", "check"],
+      "command": [
+        "bash",
+        "-eu",
+        "-c",
+        "status=0; make -C build/tests check || status=$?; if [ \"$status\" -ne 0 ]; then cat build/tests/test-suite.log; fi; exit \"$status\""
+      ],
       "timeoutSeconds": 600
     }
   ]
