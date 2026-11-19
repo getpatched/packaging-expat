@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "suites": [
+    {
+      "name": "Expat UTF-8 upstream unit tests",
+      "command": ["make", "-C", "build/tests", "check"],
+      "timeoutSeconds": 600
+    },
+    {
+      "name": "Expat UTF-16 upstream unit tests",
+      "command": ["make", "-C", "buildw/tests", "check"],
+      "timeoutSeconds": 600
+    }
+  ]
+}
