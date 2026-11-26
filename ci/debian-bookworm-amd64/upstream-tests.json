@@ -2,22 +2,12 @@
   "schemaVersion": 1,
   "suites": [
     {
-      "name": "Diagnostic: distro baseline UTF-8 upstream unit tests",
-      "command": [
-        "bash",
-        "-eu",
-        "-c",
-        "mkdir -p /build/baseline-comparison\ndpkg-source -x /originals/expat_2.5.0-1+deb12u5.dsc /build/baseline-comparison/source\ncd /build/baseline-comparison/source\ndpkg-buildpackage -b -us -uc -j1\ndpkg-source --before-build .\nstatus=0\nmake -C build/tests check || status=$?\nif [ \"$status\" -ne 0 ]; then cat build/tests/test-suite.log; fi\nexit \"$status\""
-      ],
-      "timeoutSeconds": 600
-    },
-    {
       "name": "Expat UTF-8 upstream unit tests",
       "command": [
         "bash",
         "-eu",
         "-c",
-        "status=0; make -C build/tests check || status=$?; if [ \"$status\" -ne 0 ]; then cat build/tests/test-suite.log; fi; exit \"$status\""
+        "patch --batch --forward --fuzz=0 -d src -p1 < /recipe/ci/debian-bookworm-amd64/upstream-allocator-test.patch; make -C build/tests clean; status=0; make -C build/tests check || status=$?; if [ \"$status\" -ne 0 ]; then cat build/tests/test-suite.log; fi; exit \"$status\""
       ],
       "timeoutSeconds": 600
     }
