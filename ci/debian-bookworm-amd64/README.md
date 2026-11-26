@@ -11,6 +11,10 @@ The test-only patch backports the assertion from upstream commit
 It asserts zero reallocations with XML_GE=1 and retains the original failing
 allocation expectations with XML_GE=0. Both test executables are rebuilt;
 no test is skipped and no runtime library source or package output is changed.
+The distro sets XML_GE=1 in CFLAGS, but not CXXFLAGS. The test invocation also
+sets it in CPPFLAGS so both C and C++ assertions match the library's configured
+feature, while retaining the distro CPPFLAGS. Both native test logs are printed
+even on success to retain their executed check counts.
 
 [Baseline comparison run](https://github.com/getpatched/packaging-expat/actions/runs/45763680330)
 at recipe commit `72927da1ebb0933457c177a6ea2e2594623591df` built the exact distro
