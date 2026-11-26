@@ -1,0 +1,62 @@
+Description: Match upstream allocation test expectations with XML_GE tracking
+ Debian backported the allocator changes but omitted this matching unit test
+ update. Keep the XML_GE=0 expectation and assert the XML_GE=1 malloc path.
+ Only the test source copied by debian/rules is adapted in CI; package runtime
+ code and binary outputs are unchanged. The older test harness uses fail()
+ instead of upstream's newer assert_true().
+Origin: backport, https://github.com/libexpat/libexpat/commit/cfce28e171676fe6f70d17b97ed8a59eaeb83f15
+Forwarded: not-needed
+
+--- a/tests/runtests.c
++++ b/tests/runtests.c
+@@ -10638,44 +10638,50 @@
+ }
+ END_TEST
+ 
+ /* Test attribute handling in the face of a dodgy reallocator */
+ START_TEST(test_nsalloc_realloc_attributes) {
+   const char *text = "<foo:e xmlns:foo='http://example.org/' bar:a='12'\n"
+                      "       xmlns:bar='http://example.org/'>"
+                      "</foo:e>";
+   int i;
+   const int max_realloc_count = 10;
+ 
+   for (i = 0; i < max_realloc_count; i++) {
+     reallocation_count = i;
+     if (_XML_Parse_SINGLE_BYTES(g_parser, text, (int)strlen(text), XML_TRUE)
+         != XML_STATUS_ERROR)
+       break;
+     /* See comment in test_nsalloc_xmlns() */
+     nsalloc_teardown();
+     nsalloc_setup();
+   }
++#if XML_GE == 1
++  /* expat_realloc(NULL, ...) delegates to expat_malloc with memory tracking. */
++  if (i != 0)
++    fail("Parsing unexpectedly required reallocations with memory tracking");
++#else
+   if (i == 0)
+     fail("Parsing worked despite failing reallocations");
+   else if (i == max_realloc_count)
+     fail("Parsing failed at max reallocation count");
++#endif
+ }
+ END_TEST
+ 
+ /* Test long element names with namespaces under a failing allocator */
+ START_TEST(test_nsalloc_long_element) {
+   const char *text
+       = "<foo:thisisalongenoughelementnametotriggerareallocation\n"
+         " xmlns:foo='http://example.org/' bar:a='12'\n"
+         " xmlns:bar='http://example.org/'>"
+         "</foo:thisisalongenoughelementnametotriggerareallocation>";
+   const XML_Char *elemstr[]
+       = {XCS("http://example.org/")
+              XCS(" thisisalongenoughelementnametotriggerareallocation foo"),
+          XCS("http://example.org/ a bar")};
+   int i;
+   const int max_alloc_count = 30;
+ 
+   for (i = 0; i < max_alloc_count; i++) {
+     allocation_count = i;
+     XML_SetReturnNSTriplet(g_parser, XML_TRUE);

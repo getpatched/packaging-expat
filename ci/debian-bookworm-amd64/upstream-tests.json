@@ -7,7 +7,7 @@
         "bash",
         "-eu",
         "-c",
-        "status=0; make -C build/tests check || status=$?; if [ \"$status\" -ne 0 ]; then cat build/tests/test-suite.log; fi; exit \"$status\""
+        "patch --batch --forward --fuzz=0 -d src -p1 < /recipe/ci/debian-bookworm-amd64/upstream-allocator-test.patch\nmake -C build/tests clean\nstatus=0\nmake -C build/tests CPPFLAGS=\"$(dpkg-buildflags --get CPPFLAGS) -DXML_GE=1\" check || status=$?\ncat build/tests/runtests.log build/tests/runtestspp.log\nexit \"$status\""
       ],
       "timeoutSeconds": 600
     }
